@@ -45,9 +45,8 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        auth = FirebaseAuth.getInstance();
-        GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
 
+        //fetching all the layout components
         SignUp = findViewById(R.id.btn_signup);
         username = findViewById(R.id.etUserName);
         email = findViewById(R.id.etemail);
@@ -55,6 +54,9 @@ public class SignUpActivity extends AppCompatActivity {
         Google = findViewById(R.id.btn_google);
         phone = findViewById(R.id.signupPhone);
 
+        //firebase authentication instance fetched
+        auth = FirebaseAuth.getInstance();
+        GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
 
         SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +66,10 @@ public class SignUpActivity extends AppCompatActivity {
                 auth.createUserWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
+
+                        //remove this toast if signup gives error
+                        Toast.makeText(SignUpActivity.this,"sign up successsful", Toast.LENGTH_SHORT).show();
+                    
                         startActivity(new Intent(SignUpActivity.this,MainActivity.class));
                     }
                 }).addOnFailureListener(new OnFailureListener() {

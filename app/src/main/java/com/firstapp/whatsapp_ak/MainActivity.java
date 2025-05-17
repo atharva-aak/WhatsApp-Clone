@@ -10,6 +10,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
+        Toast.makeText(SignInActivity.this,"this is the main acitivity", Toast.LENGTH_SHORT).show();
     }
 }
