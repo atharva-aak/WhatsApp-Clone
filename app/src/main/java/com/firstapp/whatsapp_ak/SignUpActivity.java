@@ -97,9 +97,13 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+       //this part is hardcoded and can be updated with any secure validation
+        
         if (requestCode == 1234){
             Task<GoogleSignInAccount> task =GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
+                //try catch used to avoid any issues in the or erros from crashing the application
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(),null);
                 FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
